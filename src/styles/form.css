@@ -7,3 +7,14 @@
     top: 0vh;
     right: 0vw;
 }
+
+.createForm{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: grey;
+    width: fit-content;
+    z-index: 1;
+    position: relative;
+    top: 20vh;
+    left: 40vw;
+}

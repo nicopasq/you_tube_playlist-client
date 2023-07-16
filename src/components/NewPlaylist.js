@@ -1,12 +1,34 @@
 import { Button, Textarea } from "@mui/joy";
-import React from "react";
+import React, { useState } from "react";
 import '../styles/form.css'
 
 function NewPlaylist({display}){
+    const [plNameInput, setPlNameInput] = useState('')
+
+    function createPlaylist(e){
+        e.preventDefault()
+        const newPlaylist = {name:plNameInput}
+        fetch('http://localhost:9292/playlists', {
+            method:"POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(newPlaylist)
+        })
+        .then(r => r.json())
+        .then(data => {
+            console.log('new playlist:', data)
+            setPlNameInput('')
+        })
+    }
+
     return (
         <div className="formContainer" style={{display:display}}>
-            <form  className="createForm">
-                <Textarea placeholder="Playlist Name"/>
+            <form onSubmit={createPlaylist} className="createForm">
+                <Textarea 
+                value={plNameInput}
+                onChange={e => setPlNameInput(e.target.value)}
+                placeholder="Playlist Name"/>
                 <Button type="submit" sx={{marginTop:"10px"}}>Submit</Button>
                 <Button /*onClick={closeForm} */ sx={{marginLeft:"10px"}}>Close</Button>
             </form>

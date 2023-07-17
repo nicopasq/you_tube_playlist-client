@@ -9,7 +9,7 @@ import EditPlaylistName from "./EditPlaylistName";
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
     const [playlistArr, setPlaylistArr ]= useState([]);
-
+    const [currentPlName, setCurrentPlName] = useState('');
     const [currentPlaylist, setCurrentPlaylist] = useState({})
 
     const [editNameForm, setEditNameForm] = useState('none')
@@ -43,6 +43,7 @@ function App(){
     function openSongs(playlist){
         const pl = playlistData.filter(pl => pl.playlist.id === playlist.id)[0];
         setCurrentPlaylist(pl)
+        setCurrentPlName(playlist.name)
     }
 
     function toggleEditNameForm(){
@@ -69,7 +70,7 @@ return (
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
         <NewSong display={newSongFormDisplay}/>
         <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm}/>
-        <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylist={currentPlaylist}/>
+        <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylist={currentPlaylist} playlistName={currentPlName}/>
         <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr}/>
     </Container>
 )

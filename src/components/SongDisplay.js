@@ -3,10 +3,9 @@ import { styled } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import React from "react";
 
-function SongDisplay({currentPlaylist, openEditNameForm}){
-    const songArr = currentPlaylist.songs ? currentPlaylist.songs : [];
-    const plName = currentPlaylist.playlist ? currentPlaylist.playlist.name : '';
-    const stackDisp = plName ? 'true' : 'hidden';
+function SongDisplay({playlistName, currentPlaylist, openEditNameForm}){
+    const songArr = currentPlaylist && currentPlaylist.songs ? currentPlaylist.songs : [];
+    const stackDisp = playlistName ? 'true' : 'hidden';
     const Item = styled(Sheet)(({ theme }) => ({
         backgroundColor:
           theme.palette.mode === "dark" ? theme.palette.background.level1 : "#fff",
@@ -52,7 +51,7 @@ function SongDisplay({currentPlaylist, openEditNameForm}){
         <div id="songDisplay" style={{border:"1px solid black", height:'40vh', width:'40vw', position:'relative', top:'15vh', left:'30%'}}>
             <Grid container spacing={2} visibility={stackDisp} sx={{flexGrow: 1 }}>
                 <Grid xs={8}>
-                    <Typography level="h2">{plName}</Typography>
+                    <Typography level="h2">{playlistName}</Typography>
                 </Grid>
                 <Grid xs={4}>
                 <Stack

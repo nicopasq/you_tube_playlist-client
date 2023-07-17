@@ -2,12 +2,25 @@ import React from "react";
 import '../styles/form.css'
 import { Button, Textarea } from "@mui/joy";
 
-function EditPlaylistName({display, closeForm}){
+function EditPlaylistName({display, closeForm, playlist}){
+    const txtVal = 'PLAYLIST NAME HAS CHANGED'
+
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch(`http://localhost:9292/playlists/${playlist.id}`, {
+            method:"PATCH",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({name:txtVal})
+        })
+    }
+
     return (
         <div className="formContainer" style={{display:display}}>
-            <form className="form">
+            <form onSubmit={handleSubmit} className="form">
                 <Textarea 
-                value='PLAYLIST NAME HAS CHANGED'
+                value={txtVal}
                 placeholder="New Playlist Name"/>
                 <Button type="submit" sx={{marginTop:"10px"}}>Submit</Button>
                 <Button onClick={closeForm} sx={{marginLeft:"10px"}}>Close</Button>

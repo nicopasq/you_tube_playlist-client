@@ -52,6 +52,15 @@ function App(){
         return editNameForm === 'none' ? setEditNameForm('block') : setEditNameForm('none')
     }
 
+    function updatePlNameState(patchedPlaylist){
+        const updatedPlaylistArr = playlistArr.map(playlist => {
+            if (playlist.id === patchedPlaylist.id){
+                playlist.name = patchedPlaylist.name
+            }
+           return playlist
+        })
+        setPlaylistArr(updatedPlaylistArr)
+    }
 
 return (
     <Container sx={{border:"1px solid black"}}>
@@ -71,7 +80,7 @@ return (
             </Button>
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
         <NewSong display={newSongFormDisplay}/>
-        <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm} playlist={editPlaylist}/>
+        <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm} playlist={editPlaylist} updatePlNameState={updatePlNameState}/>
         <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylistData={currentPlaylistData} currentPlaylist={currentPlaylist}/>
         <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr}/>
     </Container>

@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/form.css'
 import { Button, Textarea } from "@mui/joy";
 
-function EditPlaylistName({display, closeForm, playlist}){
+function EditPlaylistName({display, closeForm, playlist, updatePlNameState}){
     const txtVal = 'PLAYLIST NAME HAS CHANGED'
 
     function handleSubmit(e){
@@ -14,6 +14,8 @@ function EditPlaylistName({display, closeForm, playlist}){
             },
             body:JSON.stringify({name:txtVal})
         })
+        .then(r => r.json())
+        .then(data => updatePlNameState(data))
     }
 
     return (

@@ -4,11 +4,15 @@ import PlaylistDisplay from "./PlaylistDisplay";
 import SongDisplay from "./SongDisplay";
 import NewPlaylist from "./NewPlaylist";
 import NewSong from "./NewSong";
+import EditPlaylistName from "./EditPlaylistName";
 
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
     const [playlistArr, setPlaylistArr ]= useState([]);
-    const [playlistSongs, setPlaylistSongs] = useState([]);
+
+    const [currentPlaylist, setCurrentPlaylist] = useState({})
+
+    const [editNameForm, setEditNameForm] = useState('none')
     const [newPlFormDisplay, setNewPlFormDisplay] = useState('none')
     const [newSongFormDisplay, setNewSongFormDisplay] = useState('none')
     const buttonSx = {
@@ -37,9 +41,14 @@ function App(){
     }
 
     function openSongs(playlist){
-        const songs = playlistData.filter(pl => pl.playlist.id === playlist.id)[0].songs;
-        setPlaylistSongs(songs)
+        const pl = playlistData.filter(pl => pl.playlist.id === playlist.id)[0];
+        setCurrentPlaylist(pl)
     }
+
+    function toggleEditNameForm(){
+        return editNameForm === 'none' ? setEditNameForm('block') : setEditNameForm('none')
+    }
+
 
 return (
     <Container sx={{border:"1px solid black"}}>
@@ -57,9 +66,10 @@ return (
         >
             Add Song
             </Button>
-        <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay}/>
+        <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
         <NewSong display={newSongFormDisplay}/>
-        <SongDisplay songArr={playlistSongs}/>
+        <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm}/>
+        <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylist={currentPlaylist}/>
         <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr}/>
     </Container>
 )

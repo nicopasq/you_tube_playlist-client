@@ -1,7 +1,20 @@
-import { Button, Grid, Typography } from "@mui/joy";
+import { Button, Divider, Grid, Stack, Typography } from "@mui/joy";
+import { styled } from "@mui/joy/styles";
+import Sheet from "@mui/joy/Sheet";
 import React from "react";
 
-function SongDisplay({songArr}){
+function SongDisplay({currentPlaylist, openEditNameForm}){
+    const songArr = currentPlaylist.songs ? currentPlaylist.songs : [];
+    const plName = currentPlaylist.playlist ? currentPlaylist.playlist.name : '';
+    const stackDisp = plName ? 'true' : 'hidden';
+    const Item = styled(Sheet)(({ theme }) => ({
+        backgroundColor:
+          theme.palette.mode === "dark" ? theme.palette.background.level1 : "#fff",
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: "center",
+        borderRadius: 4,
+      }));
     const songLi = songArr.map(song => {
         return (
             <li key={song.id}>
@@ -28,9 +41,45 @@ function SongDisplay({songArr}){
             </li>
         )
     })
+
+    function deletePlaylist(id){}
+    
+    function editPlaylist(e){
+        return e.target.id === 'changeName' ? openEditNameForm() : deletePlaylist(currentPlaylist.playlist.id)
+    }
+
     return (
         <div id="songDisplay" style={{border:"1px solid black", height:'40vh', width:'40vw', position:'relative', top:'15vh', left:'30%'}}>
-            <ul style={{listStyle:"none", overflowY:"scroll", overflowX:"hidden", height:"38vh", width:'94%'}}>
+            <Grid container spacing={2} visibility={stackDisp} sx={{flexGrow: 1 }}>
+                <Grid xs={8}>
+                    <Typography level="h2">{plName}</Typography>
+                </Grid>
+                <Grid xs={4}>
+                <Stack
+            direction="row"
+            divider={<Divider orientation="vertical" />}
+            spacing={2}
+            justifyContent="center"
+            sx={{ margin: "10px" }}
+          >
+            <Item
+              id="changeName"
+              sx={{ color: "blue" }}
+              onClick={editPlaylist}
+            >
+              Change Playlist Name
+            </Item>
+            <Item
+              id="delete"
+              sx={{ color: "red" }}
+              onClick={editPlaylist}
+            >
+              Delete Playlist
+            </Item>
+          </Stack>
+                </Grid>
+            </Grid>
+            <ul style={{listStyle:"none", overflowY:"scroll", overflowX:"hidden", height:"30vh", width:'94%'}}>
                 {songLi}
             </ul>
         </div>

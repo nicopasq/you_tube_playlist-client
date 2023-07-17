@@ -8,6 +8,7 @@ import NewSong from "./NewSong";
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
     const [playlistArr, setPlaylistArr ]= useState([]);
+    const [playlistSongs, setPlaylistSongs] = useState([]);
     const [newPlFormDisplay, setNewPlFormDisplay] = useState('none')
     const [newSongFormDisplay, setNewSongFormDisplay] = useState('none')
     const buttonSx = {
@@ -35,6 +36,11 @@ function App(){
         setNewPlFormDisplay('none')
     }
 
+    function openSongs(playlist){
+        const songs = playlistData.filter(pl => pl.playlist.id === playlist.id)[0].songs;
+        setPlaylistSongs(songs)
+    }
+
 return (
     <Container sx={{border:"1px solid black"}}>
         <Button 
@@ -53,8 +59,8 @@ return (
             </Button>
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay}/>
         <NewSong display={newSongFormDisplay}/>
-        <SongDisplay/>
-        <PlaylistDisplay playlistArr={playlistArr}/>
+        <SongDisplay songArr={playlistSongs}/>
+        <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr}/>
     </Container>
 )
 }

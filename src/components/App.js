@@ -7,9 +7,9 @@ import NewSong from "./NewSong";
 
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
+    const [playlistArr, setPlaylistArr ]= useState([]);
     const [newPlFormDisplay, setNewPlFormDisplay] = useState('none')
     const [newSongFormDisplay, setNewSongFormDisplay] = useState('none')
-    const playlistArr = playlistData.map(playlist => playlist.playlist);
     const buttonSx = {
         position:"relative",
         top:'14vh',
@@ -19,11 +19,20 @@ function App(){
     useEffect(() => {
         fetch('http://localhost:9292/playlists')
         .then(r => r.json())
-        .then(data => setPlaylistData(data))
+        .then(data => {
+            setPlaylistData(data)
+            setPlaylistArr(data.map(pl => pl.playlist))
+        })
     }, [])
 
     function toggleFormDispaly(e){
         return e.target.id === "createPlButton" ? setNewPlFormDisplay('block') : setNewSongFormDisplay('block');
+    }
+
+    function updatePlaylistArr(newPlaylist){
+        const newPlaylistArr = [...playlistArr, newPlaylist]
+        setPlaylistArr(newPlaylistArr)
+        setNewPlFormDisplay('none')
     }
 
 return (
@@ -42,7 +51,7 @@ return (
         >
             Add Song
             </Button>
-        <NewPlaylist display={newPlFormDisplay}/>
+        <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay}/>
         <NewSong display={newSongFormDisplay}/>
         <SongDisplay/>
         <PlaylistDisplay playlistArr={playlistArr}/>

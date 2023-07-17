@@ -2,7 +2,7 @@ import { Button, Textarea } from "@mui/joy";
 import React, { useState } from "react";
 import '../styles/form.css'
 
-function NewPlaylist({display}){
+function NewPlaylist({display, updatePlaylistArr}){
     const [plNameInput, setPlNameInput] = useState('')
 
     function createPlaylist(e){
@@ -17,7 +17,7 @@ function NewPlaylist({display}){
         })
         .then(r => r.json())
         .then(data => {
-            console.log('new playlist:', data)
+            updatePlaylistArr(data)
             setPlNameInput('')
         })
     }

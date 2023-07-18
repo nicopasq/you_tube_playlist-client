@@ -8,11 +8,8 @@ import EditPlaylistName from "./EditPlaylistName";
 
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
-    const [playlistArr, setPlaylistArr ]= useState([]);
-
     const [currentPlaylistData, setCurrentPlaylistData] = useState({})
     const [editPlaylist, setEditPlaylist] = useState({})
-
     const [editNameForm, setEditNameForm] = useState('none')
     const [newPlFormDisplay, setNewPlFormDisplay] = useState('none')
     const [newSongFormDisplay, setNewSongFormDisplay] = useState('none')
@@ -27,7 +24,6 @@ function App(){
         .then(r => r.json())
         .then(data => {
             setPlaylistData(data)
-            setPlaylistArr(data.map(pl => pl.playlist))
         })
     }, [])
 
@@ -36,9 +32,7 @@ function App(){
     }
 
     function updatePlaylistArr(newPlaylist){
-        const newPlaylistArr = [...playlistArr, newPlaylist]
         const newPlaylistHash = [...playlistData, {playlist:newPlaylist, songs:[]}]
-        setPlaylistArr(newPlaylistArr)
         setPlaylistData(newPlaylistHash)
         setNewPlFormDisplay('none')
     }
@@ -54,19 +48,20 @@ function App(){
     }
 
     function updatePlNameState(patchedPlaylist){
-        const updatedPlaylistArr = playlistArr.map(playlist => {
-            if (playlist.id === patchedPlaylist.id){
-                playlist.name = patchedPlaylist.name
+        const updatedPlaylistData = playlistData.map(pl => {
+            if (pl.playlist.id === patchedPlaylist.id){
+                pl.playlist.name = patchedPlaylist.name
             }
-           return playlist
+           return pl
         })
-        setPlaylistArr(updatedPlaylistArr)
+        setPlaylistData(updatedPlaylistData)
     }
 
     function removePlaylist(id){
         const updatedPlaylistData = playlistData.filter(pl => pl.playlist.id !== id)
         setPlaylistData(updatedPlaylistData)
         setCurrentPlaylistData({})
+        alert('Playlist Deleted')
     }
 
 return (

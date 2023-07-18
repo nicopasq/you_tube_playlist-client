@@ -64,6 +64,12 @@ function App(){
         alert('Playlist Deleted')
     }
 
+    function addSongToDisplay(song){
+       const pl = playlistData.filter(pl => pl.playlist.id === song.playlist_id)[0]
+       pl.songs.push(song)
+       setNewSongFormDisplay('none')
+    }
+
 return (
     <Container sx={{border:"1px solid black"}}>
         <Button 
@@ -81,7 +87,7 @@ return (
             Add Song
             </Button>
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
-        <NewSong closeForm={() => setNewSongFormDisplay('none')} display={newSongFormDisplay} playlist={playlistData.map(pl => pl.playlist)}/>
+        <NewSong closeForm={() => setNewSongFormDisplay('none')} display={newSongFormDisplay} playlist={playlistData.map(pl => pl.playlist)} addSongToDisplay={addSongToDisplay}/>
         <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm} playlist={editPlaylist} updatePlNameState={updatePlNameState}/>
         <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylistData={currentPlaylistData} removePlaylist={removePlaylist}/>
         <PlaylistDisplay openSongs={openSongs} playlistData={playlistData}/>

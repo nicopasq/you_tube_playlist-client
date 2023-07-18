@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../styles/form.css'
 import { Button, Textarea } from "@mui/joy";
 
-function NewSong({display, closeForm, playlist}){
+function NewSong({display, closeForm, playlist, addSongToDisplay}){
     const [newSongBody, setNewSongBody] = useState({
         song_title:'',
         artist:'',
@@ -37,7 +37,7 @@ function NewSong({display, closeForm, playlist}){
             body:JSON.stringify(newSongBody)
         })
         .then(r => r.json())
-        .then(data => console.log('new song from DB:', data))
+        .then(data => addSongToDisplay(data))
     }
 
     return (

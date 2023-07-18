@@ -3,7 +3,8 @@ import { styled } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import React from "react";
 
-function SongDisplay({currentPlaylist, currentPlaylistData, openEditNameForm}){
+function SongDisplay({ currentPlaylistData, openEditNameForm, removePlaylist}){
+    const currentPlaylist = currentPlaylistData.playlist ? currentPlaylistData.playlist : {};
     const songArr = currentPlaylistData && currentPlaylistData.songs ? currentPlaylistData.songs : [];
     const stackDisp = currentPlaylist.name ? 'true' : 'hidden';
     const Item = styled(Sheet)(({ theme }) => ({
@@ -41,7 +42,11 @@ function SongDisplay({currentPlaylist, currentPlaylistData, openEditNameForm}){
         )
     })
 
-    function deletePlaylist(id){}
+    function deletePlaylist(id){
+      fetch(`http://localhost:9292/playlists/${id}`, {method:"DELETE"})
+      .then(r => r.json())
+      .then(data => removePlaylist(data.id))
+    }
     
 
     return (
@@ -68,7 +73,7 @@ function SongDisplay({currentPlaylist, currentPlaylistData, openEditNameForm}){
             <Item
               id="delete"
               sx={{ color: "red" }}
-              onClick={deletePlaylist}
+              onClick={() => deletePlaylist(currentPlaylist.id)}
             >
               Delete Playlist
             </Item>

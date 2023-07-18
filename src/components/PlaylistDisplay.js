@@ -1,7 +1,8 @@
 import { Typography } from "@mui/joy";
 import React from "react";
 
-function PlaylistDisplay({playlistArr, openSongs}){
+function PlaylistDisplay({playlistData, openSongs}){
+    const playlistArr = playlistData.map(pl => pl.playlist)
     const playlistLi = playlistArr.map(playlist => {
         return (
             <li onClick={() => openSongs(playlist)} className="playlistLi" key={playlist.id}>

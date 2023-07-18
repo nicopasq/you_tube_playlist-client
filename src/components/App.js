@@ -9,7 +9,7 @@ import EditPlaylistName from "./EditPlaylistName";
 function App(){
     const [playlistData, setPlaylistData] = useState([]);
     const [playlistArr, setPlaylistArr ]= useState([]);
-    const [currentPlaylist, setCurrentPlaylist] = useState('');
+
     const [currentPlaylistData, setCurrentPlaylistData] = useState({})
     const [editPlaylist, setEditPlaylist] = useState({})
 
@@ -37,14 +37,15 @@ function App(){
 
     function updatePlaylistArr(newPlaylist){
         const newPlaylistArr = [...playlistArr, newPlaylist]
+        const newPlaylistHash = [...playlistData, {playlist:newPlaylist, songs:[]}]
         setPlaylistArr(newPlaylistArr)
+        setPlaylistData(newPlaylistHash)
         setNewPlFormDisplay('none')
     }
 
     function openSongs(playlist){
         const pl = playlistData.filter(pl => pl.playlist.id === playlist.id)[0];
         setCurrentPlaylistData(pl)
-        setCurrentPlaylist(playlist)
     }
 
     function toggleEditNameForm(playlistData){
@@ -60,6 +61,12 @@ function App(){
            return playlist
         })
         setPlaylistArr(updatedPlaylistArr)
+    }
+
+    function removePlaylist(id){
+        const updatedPlaylistData = playlistData.filter(pl => pl.playlist.id !== id)
+        setPlaylistData(updatedPlaylistData)
+        setCurrentPlaylistData({})
     }
 
 return (
@@ -81,8 +88,8 @@ return (
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
         <NewSong display={newSongFormDisplay}/>
         <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm} playlist={editPlaylist} updatePlNameState={updatePlNameState}/>
-        <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylistData={currentPlaylistData} currentPlaylist={currentPlaylist}/>
-        <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr}/>
+        <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylistData={currentPlaylistData} removePlaylist={removePlaylist}/>
+        <PlaylistDisplay openSongs={openSongs} playlistData={playlistData}/>
     </Container>
 )
 }

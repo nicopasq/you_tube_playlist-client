@@ -81,7 +81,7 @@ return (
             Add Song
             </Button>
         <NewPlaylist updatePlaylistArr={updatePlaylistArr} display={newPlFormDisplay} closeForm={() => setNewPlFormDisplay('none')}/>
-        <NewSong display={newSongFormDisplay}/>
+        <NewSong closeForm={() => setNewSongFormDisplay('none')} display={newSongFormDisplay} playlist={playlistData.map(pl => pl.playlist)}/>
         <EditPlaylistName display={editNameForm} closeForm={toggleEditNameForm} playlist={editPlaylist} updatePlNameState={updatePlNameState}/>
         <SongDisplay openEditNameForm={toggleEditNameForm} currentPlaylistData={currentPlaylistData} removePlaylist={removePlaylist}/>
         <PlaylistDisplay openSongs={openSongs} playlistData={playlistData}/>

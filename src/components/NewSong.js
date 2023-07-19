@@ -10,9 +10,9 @@ function NewSong({ display, closeForm, playlist, addSongToDisplay }) {
     playlist_id: 0,
     album: "",
   });
-  const { song_title, artist, url, album } = newSongBody;
+  const { song_title, artist, url, album, playlist_id } = newSongBody;
   const playlistOptions = playlist.map((pl) => {
-    if (pl.name.trim().length !== 0) {
+    if (pl.name !== '') {
       return <option key={pl.id}>{pl.name}</option>;
     }
   });
@@ -38,7 +38,13 @@ function NewSong({ display, closeForm, playlist, addSongToDisplay }) {
       body: JSON.stringify(newSongBody),
     })
       .then((r) => r.json())
-      .then((data) => addSongToDisplay(data));
+      .then((data) => {
+        if(data !== "This song is already in this playlist."){
+          addSongToDisplay(data, playlist_id)
+        } else {
+          alert("This song is already in this playlist.")
+        }
+      });
   }
 
   return (

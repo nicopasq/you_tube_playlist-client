@@ -7,8 +7,10 @@ import NewSong from "./NewSong";
 import EditPlaylistName from "./EditPlaylistName";
 
 function App() {
-  const [playlistData, setPlaylistData] = useState([]);
-  const [currentPlaylistData, setCurrentPlaylistData] = useState({});
+  const [playlistArr, setPlaylistArr] = useState([]);
+  const [songs, setSongs] = useState([]);
+
+  const [currentPlaylist, setCurrentPlaylist] = useState({});
   const [editPlaylist, setEditPlaylist] = useState({});
   const [editNameForm, setEditNameForm] = useState("none");
   const [newPlFormDisplay, setNewPlFormDisplay] = useState("none");
@@ -23,7 +25,7 @@ function App() {
     fetch("http://localhost:9292/playlists")
       .then((r) => r.json())
       .then((data) => {
-        setPlaylistData(data);
+        setPlaylistArr(data);
       });
   }, []);
 
@@ -34,18 +36,19 @@ function App() {
   }
 
   function updatePlaylistArr(newPlaylist) {
-    const newPlaylistHash = [
-      ...playlistData,
-      { playlist: newPlaylist, songs: [] },
-    ];
-    setPlaylistData(newPlaylistHash);
+    const newPlaylistArr = [...playlistArr, newPlaylist];
+    setPlaylistArr(newPlaylistArr);
     setNewPlFormDisplay("none");
   }
 
   //change to GET fetch to songs
-  function openSongs(playlist) {
-    const pl = playlistData.filter((pl) => pl.playlist.id === playlist.id)[0];
-    setCurrentPlaylistData(pl);
+  function openSongs(id) {
+    fetch(`http://localhost:9292/songs/${id}`)
+    .then(r => r.json())
+    .then(data => setSongs(data))
+
+    const pl = playlistArr.filter((pl) => pl.id === id)[0];
+    setCurrentPlaylist(pl);
   }
 
   function toggleEditNameForm(playlistData) {
@@ -56,29 +59,29 @@ function App() {
   }
 
   function updatePlNameState(patchedPlaylist) {
-    const updatedPlaylistData = playlistData.map((pl) => {
-      if (pl.playlist.id === patchedPlaylist.id) {
-        pl.playlist.name = patchedPlaylist.name;
+    const updatedPlaylistData = playlistArr.map((pl) => {
+      if (pl.id === patchedPlaylist.id) {
+        pl.name = patchedPlaylist.name;
       }
       return pl;
     });
-    setPlaylistData(updatedPlaylistData);
+    setPlaylistArr(updatedPlaylistData);
   }
 
   function removePlaylist(id) {
-    const updatedPlaylistData = playlistData.filter(
-      (pl) => pl.playlist.id !== id
+    const updatedPlaylistData = playlistArr.filter(
+      (pl) => pl.id !== id
     );
-    setPlaylistData(updatedPlaylistData);
-    setCurrentPlaylistData({});
+    setPlaylistArr(updatedPlaylistData);
+    setCurrentPlaylist({});
+    setSongs([]);
     alert("Playlist Deleted");
   }
 
-  function addSongToDisplay(song) {
-    const pl = playlistData.filter(
-      (pl) => pl.playlist.id === song.playlist_id
-    )[0];
-    pl.songs.push(song);
+  function addSongToDisplay(newSong, id) {
+    if(currentPlaylist.id === id){
+      setSongs([...songs, newSong])
+    }
     setNewSongFormDisplay("none");
   }
 
@@ -98,7 +101,7 @@ function App() {
       <NewSong
         closeForm={() => setNewSongFormDisplay("none")}
         display={newSongFormDisplay}
-        playlist={playlistData.map((pl) => pl.playlist)}
+        playlist={playlistArr}
         addSongToDisplay={addSongToDisplay}
       />
       <EditPlaylistName
@@ -109,10 +112,11 @@ function App() {
       />
       <SongDisplay
         openEditNameForm={toggleEditNameForm}
-        currentPlaylistData={currentPlaylistData}
+        currentPlaylist={currentPlaylist}
+        songsArr={songs}
         removePlaylist={removePlaylist}
       />
-      <PlaylistDisplay openSongs={openSongs} playlistData={playlistData} />
+      <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr} />
     </Container>
   );
 }

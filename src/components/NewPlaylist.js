@@ -17,8 +17,12 @@ function NewPlaylist({ display, updatePlaylistArr, closeForm }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        updatePlaylistArr(data);
-        setPlNameInput("");
+        if (data !== 'Please enter a playlist name.'){
+          updatePlaylistArr(data);
+          setPlNameInput("");
+        } else{
+          alert('Please enter a playlist name.')
+        }
       });
   }
 

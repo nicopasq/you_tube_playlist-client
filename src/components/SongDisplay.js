@@ -4,17 +4,11 @@ import Sheet from "@mui/joy/Sheet";
 import React from "react";
 
 function SongDisplay({
-  currentPlaylistData,
+  currentPlaylist,
   openEditNameForm,
   removePlaylist,
+  songsArr
 }) {
-  const currentPlaylist = currentPlaylistData.playlist
-    ? currentPlaylistData.playlist
-    : {};
-  const songArr =
-    currentPlaylistData && currentPlaylistData.songs
-      ? currentPlaylistData.songs
-      : [];
   const stackDisp = currentPlaylist.name ? "true" : "hidden";
   const Item = styled(Sheet)(({ theme }) => ({
     backgroundColor: "lightGrey",
@@ -22,7 +16,7 @@ function SongDisplay({
     textAlign: "center",
     borderRadius: 4,
   }));
-  const songLi = songArr.map((song) => {
+  const songLi = songsArr.map((song) => {
     return (
       <li key={song.id}>
         <Grid

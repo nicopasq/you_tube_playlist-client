@@ -1,11 +1,10 @@
 import { Typography } from "@mui/joy";
 import React from "react";
 
-function PlaylistDisplay({playlistData, openSongs}){
-    const playlistArr = playlistData.map(pl => pl.playlist);
+function PlaylistDisplay({playlistArr, openSongs}){
     const playlistLi = playlistArr.map(playlist => {
         return (
-            <li onClick={() => openSongs(playlist)} className="playlistLi" key={playlist.id}>
+            <li onClick={() => openSongs(playlist.id)} className="playlistLi" key={playlist.id}>
                 <Typography level='h5'>{playlist.name}</Typography>
             </li>
         );

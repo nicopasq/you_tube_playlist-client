@@ -41,7 +41,6 @@ function App() {
     setNewPlFormDisplay("none");
   }
 
-  //change to GET fetch to songs
   function openSongs(id) {
     fetch(`http://localhost:9292/songs/${id}`)
     .then(r => r.json())

@@ -38,8 +38,8 @@ function SongDisplay({
           </Grid>
           <Grid xs={2}>
             <Typography level="h5">Link</Typography>
-            <a href={song.link}>
-              <Button>Click to Listen</Button>
+            <a href={song.url}>
+              <Button href={song.url}>Click to Listen</Button>
             </a>
           </Grid>
         </Grid>

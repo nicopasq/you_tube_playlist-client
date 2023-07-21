@@ -15,6 +15,7 @@ function NewSong({ display, closeForm, playlist, addSongToDisplay }) {
     if (pl.name !== '') {
       return <option key={pl.id}>{pl.name}</option>;
     }
+    return null
   });
 
   function updateNewSongBody(e) {

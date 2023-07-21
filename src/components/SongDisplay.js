@@ -1,13 +1,15 @@
 import { Button, Divider, Grid, Stack, Typography } from "@mui/joy";
 import { styled } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
-import React from "react";
+import React, { useState } from "react";
+import EditSong from "./EditSong";
 
 function SongDisplay({
   currentPlaylist,
   openEditNameForm,
   removePlaylist
 }) {
+  const [editSongDisp, setEditSongDisp] = useState('none')
   const stackDisp = currentPlaylist.name ? "true" : "hidden";
   const Item = styled(Sheet)(({ theme }) => ({
     backgroundColor: "lightGrey",
@@ -44,6 +46,9 @@ function SongDisplay({
               <Button href={song.url}>Click to Listen</Button>
             </a>
           </Grid>
+          <Grid xs={2}>
+              <button onClick={() => setEditSongDisp('block')}>...</button>
+          </Grid>
         </Grid>
       </li>
     );
@@ -67,6 +72,7 @@ function SongDisplay({
         left: "30%",
       }}
     >
+      <EditSong display={editSongDisp} closeEditSong={() => setEditSongDisp('none')}/>
       <Grid container spacing={2} visibility={stackDisp} sx={{ flexGrow: 1 }}>
         <Grid xs={8}>
           <Typography level="h2">{currentPlaylist.name}</Typography>

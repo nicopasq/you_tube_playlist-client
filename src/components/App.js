@@ -9,8 +9,6 @@ import EditPlaylistName from "./EditPlaylistName";
 function App() {
   const [playlistArr, setPlaylistArr] = useState([]);
 
-  const [songs, setSongs] = useState([])
-
   const [currentPlaylist, setCurrentPlaylist] = useState({});
   const [editPlaylist, setEditPlaylist] = useState({});
   const [editNameForm, setEditNameForm] = useState("none");
@@ -43,10 +41,6 @@ function App() {
   }
 
   function openSongs(id) {
-    fetch(`http://localhost:9292/songs/${id}`)
-    .then(r => r.json())
-    .then(data => setSongs(data))
-
     const pl = playlistArr.filter((pl) => pl.id === id)[0];
     setCurrentPlaylist(pl);
   }
@@ -74,7 +68,6 @@ function App() {
     );
     setPlaylistArr(updatedPlaylistData);
     setCurrentPlaylist({});
-    setSongs([]);
     alert("Playlist Deleted");
   }
 

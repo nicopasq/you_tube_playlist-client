@@ -1,0 +1,20 @@
+#editSongFormContainer{
+        background-color: rgba(128, 128, 128, 0.483);
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: absolute;
+        top: -21.25vh;
+        right: -22vw;
+}
+
+#editSongForm{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: grey;
+    width: fit-content;
+    z-index: 1;
+    position: relative;
+    top: 20vh;
+    left: 40vw;
+}

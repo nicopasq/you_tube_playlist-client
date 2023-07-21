@@ -8,7 +8,8 @@ import EditPlaylistName from "./EditPlaylistName";
 
 function App() {
   const [playlistArr, setPlaylistArr] = useState([]);
-  const [songs, setSongs] = useState([]);
+
+  const [songs, setSongs] = useState([])
 
   const [currentPlaylist, setCurrentPlaylist] = useState({});
   const [editPlaylist, setEditPlaylist] = useState({});
@@ -78,10 +79,10 @@ function App() {
   }
 
   function addSongToDisplay(newSong, id) {
-    if(currentPlaylist.id === id){
-      setSongs([...songs, newSong])
-    }
-    setNewSongFormDisplay("none");
+    const targetPlaylist = playlistArr.filter(pl => pl.id === id)[0]
+    const playlistWithNewSong = targetPlaylist.songs.push(newSong)
+    const newPlaylistArr = playlistArr.filter(pl => pl.id === playlistWithNewSong.id ? pl = playlistWithNewSong : pl);
+    setPlaylistArr(newPlaylistArr)
   }
 
   return (
@@ -112,7 +113,6 @@ function App() {
       <SongDisplay
         openEditNameForm={toggleEditNameForm}
         currentPlaylist={currentPlaylist}
-        songsArr={songs}
         removePlaylist={removePlaylist}
       />
       <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr} />

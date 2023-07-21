@@ -6,8 +6,7 @@ import React from "react";
 function SongDisplay({
   currentPlaylist,
   openEditNameForm,
-  removePlaylist,
-  songsArr
+  removePlaylist
 }) {
   const stackDisp = currentPlaylist.name ? "true" : "hidden";
   const Item = styled(Sheet)(({ theme }) => ({
@@ -16,7 +15,10 @@ function SongDisplay({
     textAlign: "center",
     borderRadius: 4,
   }));
-  const songLi = songsArr.map((song) => {
+
+  let songLi = []
+  if (currentPlaylist.songs)
+  songLi = currentPlaylist.songs.map((song) => {
     return (
       <li key={song.id}>
         <Grid

@@ -9,6 +9,7 @@ function SongDisplay({
   openEditNameForm,
   removePlaylist
 }) {
+  const [songId, setSongId] = useState(0);
   const [editSongDisp, setEditSongDisp] = useState('none')
   const stackDisp = currentPlaylist.name ? "true" : "hidden";
   const Item = styled(Sheet)(({ theme }) => ({
@@ -18,6 +19,11 @@ function SongDisplay({
     borderRadius: 4,
   }));
 
+  function openEditSong(songId){
+    setSongId(songId)
+    setEditSongDisp('block')
+  }
+
   let songLi = []
   if (currentPlaylist.songs)
   songLi = currentPlaylist.songs.map((song) => {
@@ -25,7 +31,7 @@ function SongDisplay({
       <li key={song.id}>
         <Grid
           container
-          spacing={4}
+          spacing={5}
           sx={{ flexGrow: 1, borderBottom: "1px solid black" }}
         >
           <Grid xs={2}>
@@ -36,7 +42,7 @@ function SongDisplay({
             <Typography level="h5">Artist</Typography>
             <Typography level="body1">{song.artist}</Typography>
           </Grid>
-          <Grid xs={4}>
+          <Grid xs={2}>
             <Typography level="h5">Album</Typography>
             <Typography level="body1">{song.album}</Typography>
           </Grid>
@@ -46,8 +52,9 @@ function SongDisplay({
               <Button href={song.url}>Click to Listen</Button>
             </a>
           </Grid>
-          <Grid xs={2}>
-              <button onClick={() => setEditSongDisp('block')}>...</button>
+          <Grid xs={4}>
+              <Button onClick={() => openEditSong(song.id)} variant="plain" sx={{margin:"5px"}}>Edit Song</Button>
+              <Button variant="plain">Remove Song</Button>
           </Grid>
         </Grid>
       </li>
@@ -72,7 +79,7 @@ function SongDisplay({
         left: "30%",
       }}
     >
-      <EditSong display={editSongDisp} closeEditSong={() => setEditSongDisp('none')}/>
+      <EditSong songId={songId} display={editSongDisp} closeEditSong={() => setEditSongDisp('none')}/>
       <Grid container spacing={2} visibility={stackDisp} sx={{ flexGrow: 1 }}>
         <Grid xs={8}>
           <Typography level="h2">{currentPlaylist.name}</Typography>

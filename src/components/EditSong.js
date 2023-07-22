@@ -2,7 +2,7 @@ import { Button, Textarea } from "@mui/joy";
 import React, { useState } from "react";
 import '../styles/editSongForm.css'
 
-function EditSong({display, closeEditSong, songId}){
+function EditSong({display, closeEditSong, songId, updateSongDisplay}){
     const updatedSong = {
         song_title:'New Song Name',
         artist:'New Artist',
@@ -10,7 +10,7 @@ function EditSong({display, closeEditSong, songId}){
         url:"https://THISisAnewFAKEurl.com"
     };
     const {song_title, artist, album, url} = updatedSong;
-    
+
     function handleSubmit(e){
         e.preventDefault()
         fetch(`http://localhost:9292/songs/${songId}`, {
@@ -21,7 +21,7 @@ function EditSong({display, closeEditSong, songId}){
             body:JSON.stringify(updatedSong)
         })
         .then(r => r.json())
-        .then(data => console.log('New Song:', data))
+        .then(data => updateSongDisplay(data))
     }
 
 

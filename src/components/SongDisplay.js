@@ -7,7 +7,8 @@ import EditSong from "./EditSong";
 function SongDisplay({
   currentPlaylist,
   openEditNameForm,
-  removePlaylist
+  removePlaylist,
+  updateSongDisplay
 }) {
   const [songId, setSongId] = useState(0);
   const [editSongDisp, setEditSongDisp] = useState('none')
@@ -67,6 +68,7 @@ function SongDisplay({
       .then((data) => removePlaylist(data.id));
   }
 
+
   return (
     <div
       id="songDisplay"
@@ -79,7 +81,7 @@ function SongDisplay({
         left: "30%",
       }}
     >
-      <EditSong songId={songId} display={editSongDisp} closeEditSong={() => setEditSongDisp('none')}/>
+      <EditSong songId={songId} display={editSongDisp} closeEditSong={() => setEditSongDisp('none')} updateSongDisplay={updateSongDisplay}/>
       <Grid container spacing={2} visibility={stackDisp} sx={{ flexGrow: 1 }}>
         <Grid xs={8}>
           <Typography level="h2">{currentPlaylist.name}</Typography>

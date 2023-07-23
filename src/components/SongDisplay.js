@@ -8,7 +8,8 @@ function SongDisplay({
   currentPlaylist,
   openEditNameForm,
   removePlaylist,
-  updateSongDisplay
+  updateSongDisplay,
+  removeSong
 }) {
   const [songId, setSongId] = useState(0);
   const [editSongDisp, setEditSongDisp] = useState('none')
@@ -70,8 +71,8 @@ function SongDisplay({
 
   function deleteSongFromState(id){
     fetch(`http://localhost:9292/songs/${id}`, { method: "DELETE" })
-      // .then((r) => r.json())
-      // .then((data) => removeSong(data.id));
+      .then((r) => r.json())
+      .then((data) => removeSong(data));
   }
 
 

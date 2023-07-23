@@ -85,6 +85,14 @@ function App() {
     setCurrentPlaylist({...currentPlaylist, songs:updatedSongs})
   }
 
+  function removeSong(data){
+    const updatedSongsArr = currentPlaylist.songs.filter(s => s.id !== data.id)
+    const updatedPl = {...currentPlaylist, songs:updatedSongsArr}
+    const updatedPlArr = playlistArr.map(pl => pl.id === updatedPl.id ? pl = updatedPl : pl)
+    setCurrentPlaylist(updatedPl)
+    setPlaylistArr(updatedPlArr)
+  }
+
   return (
     <Container sx={{ border: "1px solid black" }}>
       <Button id="createPlButton" onClick={toggleFormDispaly} sx={buttonSx}>
@@ -115,6 +123,7 @@ function App() {
         currentPlaylist={currentPlaylist}
         removePlaylist={removePlaylist}
         updateSongDisplay={updateSongDisplay}
+        removeSong={removeSong}
       />
       <PlaylistDisplay openSongs={openSongs} playlistArr={playlistArr} />
     </Container>

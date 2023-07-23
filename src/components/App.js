@@ -71,7 +71,7 @@ function App() {
     alert("Playlist Deleted");
   }
 
-  function addSongToDisplay(newSong, id) {
+  function addSongToArray(newSong, id) {
     const targetPlaylist = playlistArr.filter(pl => pl.id === id)[0]
     const playlistWithNewSong = targetPlaylist.songs.push(newSong)
     const newPlaylistArr = playlistArr.filter(pl => pl.id === playlistWithNewSong.id ? pl = playlistWithNewSong : pl);
@@ -102,7 +102,7 @@ function App() {
         closeForm={() => setNewSongFormDisplay("none")}
         display={newSongFormDisplay}
         playlist={playlistArr}
-        addSongToDisplay={addSongToDisplay}
+        addSongToDisplay={addSongToArray}
       />
       <EditPlaylistName
         display={editNameForm}

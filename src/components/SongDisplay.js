@@ -49,9 +49,9 @@ function SongDisplay({
           </Grid>
           <Grid xs={2}>
             <Typography level="h5">Link</Typography>
-            <a href={song.url}>
-              <Button href={song.url}>Click to Listen</Button>
-            </a>
+              <Button onClick={() => song.url !== "" ? window.open(song.url, "_blank", "noreferrer") : alert("No link attached")}  >
+                Click to Listen
+              </Button>
           </Grid>
           <Grid xs={4}>
               <Button onClick={() => openEditSong(song.id)} variant="plain" sx={{margin:"5px"}}>Edit Song</Button>

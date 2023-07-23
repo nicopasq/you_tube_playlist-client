@@ -1,5 +1,5 @@
 import { Button, Textarea } from "@mui/joy";
-import React, { useState } from "react";
+import React from "react";
 import '../styles/editSongForm.css'
 
 function EditSong({display, closeEditSong, songId, updateSongDisplay}){
@@ -7,7 +7,7 @@ function EditSong({display, closeEditSong, songId, updateSongDisplay}){
         song_title:'New Song Name',
         artist:'New Artist',
         album:'New Album',
-        url:"https://THISisAnewFAKEurl.com"
+        url:""
     };
     const {song_title, artist, album, url} = updatedSong;
 
@@ -50,7 +50,6 @@ function EditSong({display, closeEditSong, songId, updateSongDisplay}){
             readOnly={true}
               defaultValue={url}
               className="newSongInput"
-              type="url"
               placeholder="YouTube URL"
             />
             <Button type="submit" sx={{ marginTop: "10px" }}>

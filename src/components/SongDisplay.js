@@ -55,7 +55,7 @@ function SongDisplay({
           </Grid>
           <Grid xs={4}>
               <Button onClick={() => openEditSong(song.id)} variant="plain" sx={{margin:"5px"}}>Edit Song</Button>
-              <Button variant="plain">Remove Song</Button>
+              <Button onClick={() => deleteSongFromState(song.id)}variant="plain">Remove Song</Button>
           </Grid>
         </Grid>
       </li>
@@ -66,6 +66,12 @@ function SongDisplay({
     fetch(`http://localhost:9292/playlists/${id}`, { method: "DELETE" })
       .then((r) => r.json())
       .then((data) => removePlaylist(data.id));
+  }
+
+  function deleteSongFromState(id){
+    fetch(`http://localhost:9292/songs/${id}`, { method: "DELETE" })
+      // .then((r) => r.json())
+      // .then((data) => removeSong(data.id));
   }
 
 

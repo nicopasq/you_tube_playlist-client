@@ -82,7 +82,10 @@ function App() {
     const updatedSongs = currentPlaylist.songs.map(song => {
       return song.id === updatedSong.id ? song = updatedSong : song
     })
-    setCurrentPlaylist({...currentPlaylist, songs:updatedSongs})
+    const updatedPl = {...currentPlaylist, songs:updatedSongs}
+    setCurrentPlaylist(updatedPl)
+    const updatedPlaylistArr = playlistArr.map(p => p.id === updatedPl.id ? p = updatedPl : p);
+    setPlaylistArr(updatedPlaylistArr)
   }
 
   function removeSong(data){

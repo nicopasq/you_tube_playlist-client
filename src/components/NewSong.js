@@ -31,6 +31,7 @@ function NewSong({ display, closeForm, playlist, addSongToDisplay }) {
 
   function addSong(e) {
     e.preventDefault();
+    if(newSongBody.playlist_id !== 0){
     fetch("http://localhost:9292/songs", {
       method: "POST",
       headers: {
@@ -46,6 +47,9 @@ function NewSong({ display, closeForm, playlist, addSongToDisplay }) {
           alert("This song is already in this playlist.")
         }
       });
+    } else {
+      alert("Please select a playlist")
+    }
   }
 
   return (

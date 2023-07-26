@@ -72,11 +72,13 @@ function App() {
   }
 
   function addSongToArray(newSong, id) {
-    const targetPlaylist = playlistArr.filter(pl => pl.id === id)[0]
-    const playlistWithNewSong = targetPlaylist.songs.push(newSong)
-    const newPlaylistArr = playlistArr.filter(pl => pl.id === playlistWithNewSong.id ? pl = playlistWithNewSong : pl);
+    const targetPlaylist = playlistArr.find(pl => pl.id === id)
+    const playlistWithNewSong = {...targetPlaylist, songs: [...targetPlaylist.songs, newSong]}
+    const newPlaylistArr = playlistArr.map(pl => pl.id === playlistWithNewSong.id ? pl = playlistWithNewSong : pl);
     setPlaylistArr(newPlaylistArr)
+    return targetPlaylist.id === currentPlaylist.id ? setCurrentPlaylist(playlistWithNewSong) : null;
   }
+  console.log(playlistArr)
 
   function updateSongDisplay(updatedSong){
     const updatedSongs = currentPlaylist.songs.map(song => {

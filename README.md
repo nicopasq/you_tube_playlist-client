@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# YouTube Music Playlist: Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+YouTube Music Playlist Client is the front-end part of a web application that allows users to create and manage playlists of their favorite YouTube videos. This application serves as the client-side component, which interacts with the YouTube Music Playlist Server API to get and update playlist.
 
-## Available Scripts
+## Features
+- **Create Playlist:**
+A form that allows a user to create a new playlist.
+- **Edit Playlist:** 
+A form that allows a user to change a playlist's name.
+- **Delete Playlist:**
+This will delete a playlist. It also deletes any associated songs from the db.
+- **Add Song:**
+A form that allows a user to add a new song to a playlist, if that song is not already in the playlist.
+- **Edit Song:**
+A form that allows a user to edit a song.
+- **Delete Song:**
+Deletes a song from a specific playlist.
 
-In the project directory, you can run:
+## Demo
+Check out a video demonstration of YouTube Music Playlist Client here.
 
-### `npm start`
+## Getting Started 
+Follow these steps to get YouTube Music Playlist Client running properly.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation
+1. Fork and clone this repository 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```git
+git@github.com:nicopasq/you_tube_playlist-client.git
+```
 
-### `npm test`
+2. Install dependencies.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```npm
+npm install
+```
 
-### `npm run build`
+## Usage
+Start the app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```npm
+npm start
+```
+**Playlist Actions**
+1. To make a playlist, click on the 'Create Playlist' button, and enter the desired name for the new playlist. Click on a playlist name to open it.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. To edit a playlist, open the playlist then click on edit playlist. Fill out the form for a new playlist name and submit. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    Note - The form to edit a playlist name is already filled out for the purpose of this project. 
 
-### `npm run eject`
+3. To delete a playlist, open the playlist then click on the 'Delete Playlist' button. An alert should show up, indicating a playlist was successfuly deleted.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Song Actions**
+1. To make a new song, click on the 'Add Song' button, and enter the song information to the form.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. To edit a song, open the playlist that contains the desired song, click on the 'Edit Song' button on the desired song, then fill out the form and submit. 
+    Note - The form to edit a song is already filled out for the purpose of this project. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. To delete a song, open the playlist that contains the desired song, click on the 'Delete Song' button. It will delete the song from state and the database.

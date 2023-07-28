@@ -10,7 +10,7 @@ function PlaylistDisplay({ playlistArr, openSongs }) {
     }
   const playlistLi = playlistArr.map((playlist) => {
     return (
-      <Link id={playlist.name} style={playlistLinkStyle} to={`/playlists/${playlist.name}`}>
+      <Link key={playlist.id} id={playlist.name} style={playlistLinkStyle} to={`/playlists/${playlist.name}`}>
         <li
           onClick={() => openSongs(playlist.id)}
           className="playlistLi"

@@ -78,7 +78,7 @@ function App() {
     setPlaylistArr(newPlaylistArr)
     return targetPlaylist.id === currentPlaylist.id ? setCurrentPlaylist(playlistWithNewSong) : null;
   }
-  console.log(playlistArr)
+
 
   function updateSongDisplay(updatedSong){
     const updatedSongs = currentPlaylist.songs.map(song => {

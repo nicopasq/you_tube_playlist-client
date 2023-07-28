@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/joy";
+import { Button, Container, Typography } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import PlaylistDisplay from "./PlaylistDisplay";
 import SongDisplay from "./SongDisplay";
@@ -100,6 +100,7 @@ function App() {
 
   return (
     <Container sx={{ border: "1px solid black" }}>
+      <Typography level="h1">YouTube Music Video Playlist Creator</Typography>
       <Button id="createPlButton" onClick={toggleFormDispaly} sx={buttonSx}>
         Create Playlist
       </Button>

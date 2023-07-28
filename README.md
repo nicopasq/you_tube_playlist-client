@@ -17,7 +17,7 @@ A form that allows a user to edit a song.
 Deletes a song from a specific playlist.
 
 ## Demo
-Check out a video demonstration of YouTube Music Playlist Client here.
+Check out a video demonstration of YouTube Music Playlist Client [here](https://www.youtube.com/watch?v=d7Z3JQLGPDw).
 
 ## Getting Started 
 Follow these steps to get YouTube Music Playlist Client running properly.

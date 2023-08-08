@@ -66,7 +66,9 @@ function SongDisplay({
   function deletePlaylist(id) {
     fetch(`http://localhost:9292/playlists/${id}`, { method: "DELETE" })
       .then((r) => r.json())
-      .then((data) => removePlaylist(data.id));
+      .then((data) =>{
+         removePlaylist(data.id)
+      });
   }
 
   function deleteSongFromState(id){
@@ -112,7 +114,7 @@ function SongDisplay({
               id="delete"
               sx={{ color: "red" }}
               onClick={() => deletePlaylist(currentPlaylist.id)}
-            >
+              >
               Delete Playlist
             </Item>
           </Stack>

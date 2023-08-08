@@ -1,6 +1,5 @@
 import { Typography } from "@mui/joy";
 import React from "react";
-import { Link } from "react-router-dom";
 
 function PlaylistDisplay({ playlistArr, openSongs }) {
     const playlistLinkStyle = {
@@ -10,15 +9,14 @@ function PlaylistDisplay({ playlistArr, openSongs }) {
     }
   const playlistLi = playlistArr.map((playlist) => {
     return (
-      <Link key={playlist.id} id={playlist.name} style={playlistLinkStyle} to={`/playlists/${playlist.name}`}>
         <li
           onClick={() => openSongs(playlist.id)}
           className="playlistLi"
           key={playlist.id}
+          style={playlistLinkStyle}
         >
           {playlist.name}
         </li>
-      </Link>
     );
   });
 
